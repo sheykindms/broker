@@ -1,4 +1,4 @@
-package com.sheykindms;
+package com.sheykindms.broker;
 
 import io.micronaut.runtime.EmbeddedApplication;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -9,13 +9,10 @@ import javax.inject.Inject;
 
 @MicronautTest
 class BrokerTest {
+  @Inject EmbeddedApplication<?> application;
 
-    @Inject
-    EmbeddedApplication<?> application;
-
-    @Test
-    void testItWorks() {
-        Assertions.assertTrue(application.isRunning());
-    }
-
+  @Test
+  void testItWorks() {
+    Assertions.assertTrue(application.isRunning());
+  }
 }

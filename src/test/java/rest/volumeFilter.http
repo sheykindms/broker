@@ -1,0 +1,2 @@
+//get quotes with volume greater than 80
+GET http://localhost:8081/quotes/jpa/volume/70

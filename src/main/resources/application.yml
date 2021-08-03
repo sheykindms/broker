@@ -1,3 +1,52 @@
 micronaut:
   application:
     name: broker
+  server:
+    port: 8081
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      redoc:
+        paths: classpath:META-INF/swagger/views/redoc
+        mapping: /redoc/**
+      rapidoc:
+        paths: classpath:META-INF/swagger/views/rapidoc
+        mapping: /rapidoc/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: thisIsTheMostSafeSecretYouHaveEverSeen
+flyway:
+  datasources:
+    dafault:
+      enabled: true
+      clean-schema: false
+      url: ${PG_JDBC_URL:`jdbc:postgresql://127.0.0.1:5432/broker`}
+      user: ${PG_USERNAME:postgres}
+      password: ${PG_PASSWORD} #added to env variables
+      schemas: br
+      default-schema: br
+datasources:
+  default:
+    url: ${PG_JDBC_URL:`jdbc:postgresql://127.0.0.1:5432/broker`}
+    username: ${PG_USERNAME:postgres}
+    password: ${PG_PASSWORD} #added to env variables
+    driver-class-name: org.postgresql.Driver
+    schema-generate: NONE
+    dialect: POSTGRES
+jpa:
+  default:
+    packages-to-scan:
+      - "com.sheykindms.broker.persistence"
+    properties:
+      hibernare:
+        show_sql: false

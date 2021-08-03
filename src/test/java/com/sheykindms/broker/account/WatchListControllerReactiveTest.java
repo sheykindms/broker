@@ -32,7 +32,8 @@ class WatchListControllerReactiveTest {
 
   @Test
   void returnsEmptyWatchListForAccount() {
-    var result = client.retrieveWatchList(getAuthorizationHeader(), TEST_ACCOUNT_ID).singleOrError();
+    var result =
+        client.retrieveWatchList(getAuthorizationHeader(), TEST_ACCOUNT_ID).singleOrError();
     assertTrue(result.blockingGet().getSymbols().isEmpty());
     assertTrue(store.getWatchList(TEST_ACCOUNT_ID).getSymbols().isEmpty());
   }
@@ -42,7 +43,11 @@ class WatchListControllerReactiveTest {
     var symbols = Stream.of("AAPL", "AMZN", "NFXL").map(Symbol::new).collect(Collectors.toList());
     WatchList watchList = new WatchList(symbols);
     store.updateWatchList(TEST_ACCOUNT_ID, watchList);
-    var result = client.retrieveWatchList(getAuthorizationHeader(), TEST_ACCOUNT_ID).singleOrError().blockingGet();
+    var result =
+        client
+            .retrieveWatchList(getAuthorizationHeader(), TEST_ACCOUNT_ID)
+            .singleOrError()
+            .blockingGet();
     assertEquals(3, result.getSymbols().size());
     assertEquals(3, store.getWatchList(TEST_ACCOUNT_ID).getSymbols().size());
   }

@@ -25,7 +25,8 @@ class MarketsControllerTest {
 
   @Test
   void returnsListOfMarkets() {
-    final List<LinkedHashMap<String, String>> markets = client.toBlocking().retrieve(GET("/"), List.class);
+    final List<LinkedHashMap<String, String>> markets =
+        client.toBlocking().retrieve(GET("/"), List.class);
     assertEquals(7, markets.size());
     assertThat(markets)
         .extracting(key -> key.get("value"))

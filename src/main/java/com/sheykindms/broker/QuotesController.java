@@ -60,35 +60,40 @@ public class QuotesController {
     final Optional<QuoteEntity> maybeQuote = quotes.findBySymbol(new SymbolEntity(symbol));
     if (maybeQuote.isEmpty()) {
       QuoteErrorInfo notFound =
-              QuoteErrorInfo.builder()
-                      .status(HttpStatus.NOT_FOUND.getCode())
-                      .error(HttpStatus.NOT_FOUND.name())
-                      .message("quote for the symbol is not available in database")
-                      .path("/quotes/" + symbol)
-                      .build();
+          QuoteErrorInfo.builder()
+              .status(HttpStatus.NOT_FOUND.getCode())
+              .error(HttpStatus.NOT_FOUND.name())
+              .message("quote for the symbol is not available in database")
+              .path("/quotes/" + symbol)
+              .build();
       return HttpResponse.notFound(notFound);
     }
     return HttpResponse.ok(maybeQuote.get());
   }
 
   @Operation(summary = "Returns a quote for the given symbol")
-  @ApiResponse(responseCode = "400", description = "Invalid symbol specified")
   @Tag(name = "quotes")
   @Get("/jpa")
   public Iterable<QuoteEntity> getAllQuotesViaJpa() {
     return quotes.findAll();
   }
 
+  @Operation(summary = "Returns a list of volumes in descending order from database")
+  @Tag(name = "quotes")
   @Get("/jpa/ordered/desc")
   public List<QuoteDTO> orderedDesc() {
     return quotes.listOrderByVolumeDesc();
   }
 
+  @Operation(summary = "Returns a list of volumes in ascending order from database")
+  @Tag(name = "quotes")
   @Get("/jpa/ordered/asc")
   public List<QuoteDTO> orderedAsc() {
     return quotes.listOrderByVolumeAsc();
   }
 
+  @Operation(summary = "Returns volumes from database greater than given value in ascending order")
+  @Tag(name = "quotes")
   @Get("/jpa/volume/{volume}")
   public List<QuoteDTO> volumeFilter(@PathVariable BigDecimal volume) {
     return quotes.findByVolumeGreaterThanOrderByVolumeAsc(volume);

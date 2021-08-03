@@ -28,13 +28,13 @@ public class MarketsController {
     this.symbols = symbols;
   }
 
-    @Operation(summary = "Return all available markets")
-    @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))
-    @Tag(name = "markets")
-    @Get
-    public List<Symbol> getSymbols() {
-      return store.getAllSymbols();
-    }
+  @Operation(summary = "Return all available markets")
+  @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))
+  @Tag(name = "markets")
+  @Get
+  public List<Symbol> getSymbols() {
+    return store.getAllSymbols();
+  }
 
   @Operation(summary = "Return all available markets from database using JPA")
   @ApiResponse(content = @Content(mediaType = MediaType.APPLICATION_JSON))

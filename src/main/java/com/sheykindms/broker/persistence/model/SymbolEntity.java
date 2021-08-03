@@ -14,10 +14,9 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SymbolEntity {
-  @Id
-  private String value;
+  @Id private String value;
 
-  //Some lombok and micronaut compatibility issues :-)
+  // Some lombok and micronaut compatibility issues :-)
   public String getValue() {
     return value;
   }

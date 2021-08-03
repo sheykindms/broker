@@ -38,16 +38,18 @@ public class TestDataProvider {
     List<QuoteEntity> quoteEntities = (List<QuoteEntity>) quotes.findAll();
     if (quoteEntities.isEmpty()) {
       LOG.info("Adding mock data to quotes relation");
-      symbols.findAll().forEach(
-          symbol -> {
-            var quote = new QuoteEntity();
-            quote.setSymbol(symbol);
-            quote.setAsk(randomValue());
-            quote.setBid(randomValue());
-            quote.setLastPrice(randomValue());
-            quote.setVolume(randomValue());
-            quotes.save(quote);
-          });
+      symbols
+          .findAll()
+          .forEach(
+              symbol -> {
+                var quote = new QuoteEntity();
+                quote.setSymbol(symbol);
+                quote.setAsk(randomValue());
+                quote.setBid(randomValue());
+                quote.setLastPrice(randomValue());
+                quote.setVolume(randomValue());
+                quotes.save(quote);
+              });
     }
   }
 

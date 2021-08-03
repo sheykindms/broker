@@ -20,7 +20,8 @@ public interface JWTWatchListClient {
   Flowable<WatchList> retrieveWatchList(@Header String authorization, UUID accountId);
 
   @Put("/account/watchlist-reactive/{accountId}")
-  HttpResponse<WatchList> updateWatchList(@Header String authorization, @Body WatchList watchList, UUID accountId);
+  HttpResponse<WatchList> updateWatchList(
+      @Header String authorization, @Body WatchList watchList, UUID accountId);
 
   @Delete("/account/watchlist-reactive/{accountId}")
   HttpResponse<WatchList> deleteWatchList(

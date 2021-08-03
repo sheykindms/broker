@@ -24,29 +24,4 @@ public class QuoteEntity {
   private BigDecimal lastPrice;
 
   private BigDecimal volume;
-
-  // Micronaut+Lombok in a nutshell:
-  public Integer getId() {
-    return id;
-  }
-
-  public SymbolEntity getSymbol() {
-    return symbol;
-  }
-
-  public BigDecimal getBid() {
-    return bid;
-  }
-
-  public BigDecimal getAsk() {
-    return ask;
-  }
-
-  public BigDecimal getLastPrice() {
-    return lastPrice;
-  }
-
-  public BigDecimal getVolume() {
-    return volume;
-  }
 }
